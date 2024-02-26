@@ -1,60 +1,30 @@
-const { graphql } = require("./components/graphql_handler");
+const { graphql_featured } = require("./components/graphql-handler");
 const { firebase } = require("../database/firebase.js")
+const { graphql } = require("./components/graphql-interop.js")
 
-function get_date(unix_time)
-{
-    const date = new Date(unix_time)
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    return `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}T${hours}:${minutes}:${seconds}Z`;
-}
-
-async function get_repositories(script)
-{
-    return new Promise(async (resolve, reject) => {
-        fetch("https://api.github.com/graphql", 
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: process.env.BEARER
-            },
-            body: JSON.stringify({ query: script }),
-        })
-        .then((response) => response.json()).then(json => {
-            resolve(json)
-        })
-    })
+function get_date(unix_time) {
+    const d = new Date(unix_time);
+    return `${d.toISOString().slice(0, 19)}Z`;
 }
 
 async function parse_docs(snap)
 {
     return new Promise(async (resolve, reject) => {
-        let handler = new graphql();
+        let handler = new graphql_featured();
         const docs = [];
 
         snap.docs.forEach((doc) => {
             const data = doc.data();
-            if (data.disabled ?? false == true) {
-                return
-            }
+            if (data.disabled ?? false) { return }
 
             handler.add_doc(data.github.owner, data.github.repo)
-
             docs.push({ 
-                ...data, 
-                id: doc.id, 
+                ...data, id: doc.id, 
                 create_time: get_date(doc._createTime._seconds * 1000) 
             });
         });
 
-        const json = await get_repositories(handler.get())
+        const json = await graphql.post(handler.get())
         
         const tuples = Object.values(json.data).map(repository => repository)
         /* Filter out themes that don't have a skin.json */
@@ -70,7 +40,8 @@ async function parse_docs(snap)
             description: data.skin_info?.description ?? "No description. Check back later",
             version: data.skin_info?.version ?? "none",
             commit_data: data.repo.defaultBranchRef.target,
-            data: docs[i] ?? null
+            data: docs[i] ?? null,
+            skin_data: data.skin_info
         }))
         resolve(tuples)
     })

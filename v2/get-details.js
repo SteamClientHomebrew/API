@@ -1,4 +1,6 @@
 const { firebase } = require("../database/firebase.js")
+const { graphql } = require("./components/graphql-interop.js")
+const { graphql_repo } = require("./components/graphql-handler");
 
 async function get_discord_info(token)
 {
@@ -22,33 +24,14 @@ async function get_discord_info(token)
 
 async function get_repository(owner, repo, readme_path, snap) {
     
-    return new Promise(async (resolve, reject) => {
-        var graphql = `
-        query {
-            repository(owner: "${owner}", name: "${repo}") {
-                name
-                defaultBranchRef { name target { ... on Commit { oid commitUrl committedDate } } }
-                file: object(expression: "HEAD:skin.json") { ... on Blob { text } }
-                read_me: object(expression: "HEAD:${readme_path}") { ... on Blob { text } }
-                listing_style: object(expression: "HEAD:millennium.styles.css") { ... on Blob { text } }
-                default_branch: defaultBranchRef { name }
-                zipballUrl: defaultBranchRef { target { ... on Commit { zipballUrl } } }
-            }
-        }`
+    return new Promise(async (resolve, reject) =>
+    {
+        const handler = new graphql_repo()
 
         // encorporate the document data aswell as create time and id from the firebase api. 
         var doc_list = { ...snap.data(), id: snap.id, create_time: snap._createTime._seconds * 1000 };
-                
-        const json = await fetch("https://api.github.com/graphql", 
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: process.env.BEARER
-            },
-            body: JSON.stringify({ query: graphql  }),      
-        })
-        .then((response) => response.json())
+
+        const json = await graphql.post(handler.get(owner, repo, readme_path))
 
         var tuples = Object.values(json.data).map(repository => repository)
         // themes that don't have a valid skin.json are filtered out. 
