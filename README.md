@@ -1,12 +1,13 @@
 ### Millennium Community Api:
-Although this api is public and open source, you are prohibited from using the live branch in production use unless given permission otherwise. 
-
+Although this api is public, open source and MIT licensed, you are prohibited from using the live branch in production use unless given permission otherwise. 
 
 ### Documentation:
 
-route: `https://millennium.web.app/api/v2` **GET**
+https://millennium.web.app/api/v2 `GET`
 
-response schema
+<details>
+    <summary>Response Schema</summary>
+    
 ```json
 {
     "type": "object",
@@ -95,7 +96,9 @@ response schema
     }
 }
 ```
-route: https://millennium.web.app/api/v2/checkupdates POST
+</details>
+
+https://millennium.web.app/api/v2/checkupdates `POST`
 
 required body
 ```json
@@ -108,7 +111,9 @@ required body
 ]
 ```
 
-response schema
+<details>
+    <summary>Response Schema</summary>
+
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -142,8 +147,13 @@ response schema
   }
 }
 ```
+</details>
 
-route: https://millennium.web.app/api/v2/details/:id GET
+route: https://millennium.web.app/api/v2/details/:id `GET`
+
+
+<details>
+    <summary>Response Schema</summary>
 
 ```json
 {
@@ -273,8 +283,9 @@ route: https://millennium.web.app/api/v2/details/:id GET
   }
 }
 ```
+</details>
 
-route: https://millennium.web.app/api/v2/update POST
+route: https://millennium.web.app/api/v2/update `POST`
 
 required body: 
 ```json
@@ -284,7 +295,8 @@ required body:
 }
 ```
 
-response schema:
+<details>
+    <summary>Response Schema</summary>
 
 ```json
 {
@@ -318,3 +330,4 @@ response schema:
   "required": ["success", "data"]
 }
 ```
+</details>
