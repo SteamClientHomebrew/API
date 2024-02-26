@@ -7,4 +7,4 @@ Legal action will be pursued otherwise.
 <br>
 
 ## Getting Started: 
-Check out the [wiki](wiki) to get a feeling for the API
+Check out the [wiki](https://github.com/ShadowMonster99/Millennium-Api/wiki) to get a feeling for the API
