@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require('cors')
 
 const millennium = express()
-process.env.NODE_INSPECTOR && millennium.listen(3000)
+// millennium.listen(3000)
 
 /* Setup express posting and CORS */
 millennium.use(express.json())
@@ -54,7 +54,7 @@ millennium.post("/api/v2/get-update", (req, res) => {
 millennium.post("/api/v2/checkupdates", async (req, res) => {
 
     const { check_updates } = require("./v2/check-updates.js")
-    check_updates()
+    check_updates(req)
         .then(result => res.json(result))
         .catch(error => res.json({success: false, message: error.toString()}))
 })

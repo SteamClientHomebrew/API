@@ -25,10 +25,10 @@ async function check_updates(req)
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: gh_bearer
+                Authorization: process.env.BEARER
             },
             body: JSON.stringify({ query: query.get()  })
-        })
+        }).then(response => response.json())
 
         const tuples = Object.values(json.data)
             .map(repository => repository)

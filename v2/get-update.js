@@ -1,4 +1,5 @@
 var admin = require("firebase-admin");
+const { firebase } = require("../database/firebase.js")
 
 async function get_update(req)
 {
