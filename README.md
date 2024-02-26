@@ -1,12 +1,14 @@
 <img src="https://i.imgur.com/9qYPFSA.png" alt="Alt text" width="40">
 
-### Millennium Community Api:
+## Millennium Community Api:
 While this API is publicly available, open-source, and licensed under the permissive MIT license, please refrain from utilizing the live branch for production purposes unless expressly granted permission.
 Legal action will be pursued otherwise.
 
-### Documentation:
+<br> 
 
-https://millennium.web.app/api/v2 `GET`
+## Featured Themes
+
+- https://millennium.web.app/api/v2 `GET`
 
 <details>
     <summary>Response Schema</summary>
@@ -100,8 +102,11 @@ https://millennium.web.app/api/v2 `GET`
 }
 ```
 </details>
+<br>
 
-https://millennium.web.app/api/v2/checkupdates `POST`
+## Check For Updates
+
+- https://millennium.web.app/api/v2/checkupdates `POST`
 
 ```json
 [
@@ -151,7 +156,11 @@ https://millennium.web.app/api/v2/checkupdates `POST`
 ```
 </details>
 
-https://millennium.web.app/api/v2/details/:id `GET`
+<br>
+
+## Get Theme Details
+
+- https://millennium.web.app/api/v2/details/:id `GET`
 
 
 <details>
@@ -287,7 +296,11 @@ https://millennium.web.app/api/v2/details/:id `GET`
 ```
 </details>
 
-https://millennium.web.app/api/v2/update `POST`
+<br>
+
+## Request Update
+
+- https://millennium.web.app/api/v2/update `POST`
 
 ```json
 {
