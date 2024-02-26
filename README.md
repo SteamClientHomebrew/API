@@ -1,5 +1,8 @@
+<img src="https://i.imgur.com/9qYPFSA.png" alt="Alt text" width="40">
+
 ### Millennium Community Api:
-Although this api is public, open source and MIT licensed, you are prohibited from using the live branch in production use unless given permission otherwise. 
+While this API is publicly available, open-source, and licensed under the permissive MIT license, please refrain from utilizing the live branch for production purposes unless expressly granted permission.
+Legal action will be pursued otherwise.
 
 ### Documentation:
 
@@ -100,7 +103,6 @@ https://millennium.web.app/api/v2 `GET`
 
 https://millennium.web.app/api/v2/checkupdates `POST`
 
-required body
 ```json
 [
     {
@@ -149,7 +151,7 @@ required body
 ```
 </details>
 
-route: https://millennium.web.app/api/v2/details/:id `GET`
+https://millennium.web.app/api/v2/details/:id `GET`
 
 
 <details>
@@ -285,9 +287,8 @@ route: https://millennium.web.app/api/v2/details/:id `GET`
 ```
 </details>
 
-route: https://millennium.web.app/api/v2/update `POST`
+https://millennium.web.app/api/v2/update `POST`
 
-required body: 
 ```json
 {
     "owner": "ex ShadowMonster99",
