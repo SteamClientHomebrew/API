@@ -1,3 +1,7 @@
+### Millennium Community Api:
+Although this api is public and open source, you are prohibited from using the live branch in production use unless given permission otherwise. 
+
+
 ### Documentation:
 
 route: `https://millennium.web.app/api/v2` **GET**
