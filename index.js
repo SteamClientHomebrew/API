@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require('cors')
 
 const millennium = express()
-millennium.listen(3001)
+// millennium.listen(3001)
 
 /* Setup express posting and CORS */
 millennium.use(express.json())
