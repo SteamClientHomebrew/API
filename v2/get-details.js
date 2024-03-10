@@ -12,7 +12,8 @@ async function get_discord_info(token)
 
             const data = {
                 name: discord?.guild?.name,
-                icon: `https://cdn.discordapp.com/icons/${discord?.guild?.id}/${discord?.guild?.icon}.webp`
+                icon: `https://cdn.discordapp.com/icons/${discord?.guild?.id}/${discord?.guild?.icon}.webp`,
+                link: `https://discord.gg/${token}`
             }
             resolve(data)
         })
@@ -75,6 +76,7 @@ async function get_repository(owner, repo, readme_path, snap) {
             name: data.theme?.name  ?? null,
             description: data.theme?.description ?? "No description. Check back later",
             version: data.theme?.version ?? "none",
+            skin_data: data.theme,
 
             // latest commit url
             commit_data: data.repo.defaultBranchRef.target,

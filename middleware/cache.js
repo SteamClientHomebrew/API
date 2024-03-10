@@ -1,4 +1,4 @@
-const minutes = 30
+const minutes = 60
 
 const NodeCache = require('node-cache');
 const cache = new NodeCache({ stdTTL: minutes * 60 }); // stdTTL is set to 1800 seconds (30 minutes)
@@ -20,4 +20,8 @@ const cache_handler = (req, res, next) => {
     next();
 };
 
-module.exports = { cache_handler }
+const reset = () => {
+    cache.flushStats()
+}
+
+module.exports = { cache_handler, reset }

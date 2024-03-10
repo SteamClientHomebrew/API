@@ -13,12 +13,20 @@ millennium.use(cors());
 
 var admin = require("firebase-admin");
 const functions = require("firebase-functions")
-const { cache_handler } = require("./middleware/cache.js")
+const { cache_handler, reset } = require("./middleware/cache.js")
 const { rate_limit } = require("./middleware/rate-limiter.js")
 
 admin.initializeApp({ 
     credential: admin.credential.cert(require('./credentials/cert.json'))
 });
+
+millennium.get("/api/updater", cache_handler, (_, res) => {
+    res.json({
+        up: true,
+        message: "200 - good to go.",
+        url: "https://api.github.com/repos/ShadowMonster99/millennium-steam-binaries/releases/latest"
+    })
+})
 
 millennium.get("/api/v2/details/:id", cache_handler, async (req, res) => {
     
@@ -67,6 +75,14 @@ millennium.post("/api/v2/checkupdates", cache_handler, async (req, res) => {
     check_updates(req)
         .then(result => res.json(result))
         .catch(error => res.json({success: false, message: error.toString()}))
+})
+
+millennium.get("/api/cache/reset", cache_handler, (_, res) => {
+    reset()
+    
+    res.json({
+        success: true
+    })
 })
 
 exports.api = functions.https.onRequest(millennium)
