@@ -8,8 +8,3 @@ Legal action will be pursued otherwise.
 
 ## Getting Started: 
 Check out the [wiki](https://github.com/ShadowMonster99/Millennium-Api/wiki) to get a feeling for the API
-
-<br>
-
-## Used By:
-- [Millennium Steam Patcher](https://github.com/ShadowMonster99/millennium-steam-patcher) by [ShadowMonster99](https://github.com/ShadowMonster99)
