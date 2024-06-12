@@ -25,7 +25,6 @@ async function parse_docs(snap)
         });
 
         const json = await graphql.post(handler.get())
-        
         const tuples = Object.values(json.data).map(repository => repository)
         /* Filter out themes that don't have a skin.json */
         .filter(repository => repository.file && repository.file.text)

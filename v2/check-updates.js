@@ -1,6 +1,15 @@
 const { graphql } = require("./components/graphql-interop.js")
 const { graphql_updates } = require("./components/graphql-handler");
 
+const {
+    log,
+    info,
+    debug,
+    warn,
+    error,
+    write,
+} = require("firebase-functions/logger");
+
 async function check_updates(req)
 {
     const handler = new graphql_updates()
